@@ -1,0 +1,134 @@
+{
+  "1001": {
+    "name": "大客户事业体",
+    "business": "cbu"
+  },
+  "1002": {
+    "name": "龙头五金事业体",
+    "business": "cbu"
+  },
+  "1003": {
+    "name": "大健康事业体",
+    "business": "cbu"
+  },
+  "1005": {
+    "name": "智能马桶制造厂",
+    "business": "cbu"
+  },
+  "1004": {
+    "name": "厨卫事业体工厂",
+    "business": "cbu"
+  },
+  "100Z": {
+    "name": "厨卫事业体工厂",
+    "business": "cbu"
+  },
+  "1008": {
+    "name": "大客户事业体",
+    "business": "cbu"
+  },
+  "1009": {
+    "name": "龙头五金事业体",
+    "business": "cbu"
+  },
+  "1007": {
+    "name": "大健康事业体",
+    "business": "cbu"
+  },
+  "1006": {
+    "name": "智能马桶事业部",
+    "business": "cbu"
+  },
+  "100A": {
+    "name": "厦门建霖厨卫事业体工厂",
+    "business": "cbu"
+  },
+  "8031": {
+    "name": "阿匹斯智能电子工厂",
+    "business": "apis"
+  },
+  "8032": {
+    "name": "阿匹斯健康管业工厂",
+    "business": "apis"
+  },
+  "8033": {
+    "name": "阿匹斯智能制造工厂",
+    "business": "apis"
+  },
+  "8038": {
+    "name": "阿匹斯健康管业",
+    "business": "apis"
+  },
+  "8037": {
+    "name": "阿匹斯智能电子",
+    "business": "apis"
+  },
+  "8021": {
+    "name": "英仕8021",
+    "business": "easo"
+  },
+  "8061": {
+    "name": "百霖",
+    "business": "fbu"
+  },
+  "8051": {
+    "name": "漳州大客户事业体8051",
+    "business": "zrn"
+  },
+  "8052": {
+    "name": "龙头五金事业体8052",
+    "business": "zrn"
+  },
+  "8058": {
+    "name": "漳州大客户事业体(无价值)",
+    "business": "zrn"
+  },
+  "8059": {
+    "name": "漳州龙头五金事业体",
+    "business": "zrn"
+  },
+  "8121": {
+    "name": "泰国建霖大客户事业体工厂",
+    "business": "thrn"
+  },
+  "8122": {
+    "name": "泰国建霖龙头五金事业体工厂",
+    "business": "thrn"
+  },
+  "8123": {
+    "name": "泰国建霖大健康客户事业体工厂",
+    "business": "thrn"
+  },
+  "8125": {
+    "name": "泰国建霖厨卫事业体工厂",
+    "business": "thrn"
+  },
+  "8126": {
+    "name": "泰国建霖净水事业体工厂",
+    "business": "thrn"
+  },
+  "8127": {
+    "name": "泰国建霖威霖事业体工厂",
+    "business": "thrn"
+  },
+  "812W": {
+    "name": "泰国建霖无价值工厂",
+    "business": "thrn"
+  },
+  "8011": {
+    "name": "宁波威霖营运中心",
+    "business": "wrn"
+  },
+  "8019": {
+    "name": "宁波威霖",
+    "business": "wrn"
+  },
+  "8191": {
+    "name": "新加坡建霖工厂",
+    "business": "sgrn"
+  },
+  "819W": {
+    "name": "新加坡建霖无价值工厂",
+    "business": "sgrn"
+  }
+}

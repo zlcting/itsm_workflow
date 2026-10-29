@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "verified": true,
+  "create": {
+    "source": "json",
+    "body_path": "0",
+    "success_path": "body",
+    "success_values": [
+      true
+    ],
+    "success_checks": [
+      {
+        "path": "status",
+        "values": [
+          200
+        ]
+      }
+    ],
+    "failure_path": "body",
+    "failure_values": [
+      false
+    ],
+    "ticket_id_path": ""
+  },
+  "upload": {
+    "verified": false,
+    "source": "json",
+    "body_path": "0",
+    "url_path": "",
+    "success_path": "",
+    "success_values": []
+  }
+}

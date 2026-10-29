@@ -1,0 +1,28 @@
+# macOS metadata
+.DS_Store
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local screenshots, integration records, and delivery reports
+/verification/
+/*.txt
+!/requirements-dev.txt
+
+# Retain only the workflow baselines required by the builders and tests
+/backups/*
+!/backups/系统异常助手_聊天补薪号前_20261021.yml
+!/backups/系统异常助手_附件排查前_20261021.yml
+!/backups/系统异常助手_附件原生直传前_20261021.yml

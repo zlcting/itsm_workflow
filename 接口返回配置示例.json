@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "verified": false,
+  "create": {
+    "source": "json",
+    "body_path": "0",
+    "success_path": "success",
+    "success_values": [true],
+    "failure_path": "success",
+    "failure_values": [false],
+    "ticket_id_path": "data.orderNo"
+  },
+  "upload": {
+    "verified": false,
+    "source": "json",
+    "body_path": "0",
+    "url_path": "data.url",
+    "success_path": "success",
+    "success_values": [true]
+  }
+}

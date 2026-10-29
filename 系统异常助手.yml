@@ -1,0 +1,1508 @@
+app:
+  description: 系统异常助手
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 系统异常助手
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/xinference:0.0.7@0b689c15d6fe27e5540f68b70fc33fda70a87942481dec849513f69fd5fb0ede
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai_api_compatible:0.0.67@fb3b4fe807abf06719464cda5d4e845a1d21b865f120bdd4fe6814d6c8a2f6c5
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables:
+  - description: 最近一次用户异常问题的标准化摘要，用于用户认为知识库回答无帮助后直接提交工单
+    id: c71bf1e6-5990-408b-8193-5dd37ff0b168
+    name: last_exception_summary
+    selector:
+    - conversation
+    - last_exception_summary
+    value: ''
+    value_type: string
+  - description: 是否正在补充当前工单；为 true 时后续对话直接进入工单流程，不再做意图识别或知识库检索
+    id: 1e3b8af7-937d-4205-a4dd-6be1c8f87a2e
+    name: ticket_flow_active
+    selector:
+    - conversation
+    - ticket_flow_active
+    value: 'false'
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 500
+        batch_count_limit: 50
+        file_size_limit: 300
+        image_file_size_limit: 100
+        video_file_size_limit: 1000
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: '您好，我是ITSM智能助手，我可以帮您查询异常错误的信息的处理办法，还可以帮您提交异常处理工单
+
+      工单内容包括：
+
+      异常数据ID，
+
+      工厂编号，
+
+      服务代码，
+
+      异常类型，
+
+      工单内容（若工单内容需要添加图片，可以在发送消息的天添加截图信息）'
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: agent
+        targetType: llm
+      id: 1768973875702-source-1769400000003-target
+      selected: false
+      source: '1768973875702'
+      sourceHandle: source
+      target: '1769400000003'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1768980983844'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1768980983844start-source-1769087070966-target
+      selected: false
+      source: 1768980983844start
+      sourceHandle: source
+      target: '1769087070966'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: iteration
+      id: 1767851291786-source-1768980983844-target
+      selected: false
+      source: '1767851291786'
+      sourceHandle: source
+      target: '1768980983844'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1769300000007-source-1769300000009-target
+      selected: false
+      source: '1769300000007'
+      sourceHandle: source
+      target: '1769300000009'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 1769300000009-submit_previous-1768973875702-target
+      selected: false
+      source: '1769300000009'
+      sourceHandle: submit_previous
+      target: '1769400000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: if-else
+      id: 1769300000008-source-1769300000006-target
+      selected: false
+      source: '1769300000008'
+      sourceHandle: source
+      target: '1769300000006'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 1769300000006-submit_ticket-1768973875702-target
+      selected: false
+      source: '1769300000006'
+      sourceHandle: submit_ticket
+      target: '1769400000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1769300000002-source-1769300000003-target
+      selected: false
+      source: '1769300000002'
+      sourceHandle: source
+      target: '1769300000003'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1769300000003-can_answer-1769300000004-target
+      selected: false
+      source: '1769300000003'
+      sourceHandle: can_answer
+      target: '1769300000004'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 1769300000003-false-1768973875702-target
+      selected: false
+      source: '1769300000003'
+      sourceHandle: 'false'
+      target: '1769400000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: agent
+      id: 1769400000001-ticket_active-1768973875702-target
+      selected: false
+      source: '1769400000001'
+      sourceHandle: ticket_active
+      target: '1768973875702'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1769400000001-false-1769300000007-target
+      selected: false
+      source: '1769400000001'
+      sourceHandle: 'false'
+      target: '1769300000007'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: agent
+      id: 1769400000002-source-1768973875702-target
+      selected: false
+      source: '1769400000002'
+      sourceHandle: source
+      target: '1768973875702'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1769400000003-source-1769400000004-target
+      selected: false
+      source: '1769400000003'
+      sourceHandle: source
+      target: '1769400000004'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 1769400000004-submitted-1769400000005-target
+      selected: false
+      source: '1769400000004'
+      sourceHandle: submitted
+      target: '1769400000005'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 1769400000004-false-answer-target
+      selected: false
+      source: '1769400000004'
+      sourceHandle: 'false'
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: answer
+      id: 1769400000005-source-answer-target
+      selected: false
+      source: '1769400000005'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1769300000004-source-1769300000005-target
+      selected: false
+      source: '1769300000004'
+      sourceHandle: source
+      target: '1769300000005'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: iteration
+        targetType: llm
+      id: 1768980983844-source-17783195346000-target
+      selected: false
+      source: '1768980983844'
+      sourceHandle: source
+      target: '17783195346000'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 1769300000009-false-1769300000008-target
+      selected: false
+      source: '1769300000009'
+      sourceHandle: 'false'
+      target: '1769300000008'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: knowledge-retrieval
+      id: 17783195346000-source-17783195844370-target
+      selected: false
+      source: '17783195346000'
+      sourceHandle: source
+      target: '17783195844370'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: if-else
+      id: 17783195844370-source-1769400000001-target
+      selected: false
+      source: '17783195844370'
+      sourceHandle: source
+      target: '1769400000001'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1769300000006-false-1769300000002-target
+      source: '1769300000006'
+      sourceHandle: 'false'
+      target: '1769300000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 54
+      id: '1767851291786'
+      position:
+        x: -581.5667230623912
+        y: 394.2986147636976
+      positionAbsolute:
+        x: -581.5667230623912
+        y: 394.2986147636976
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1768973875702.text#}}'
+        desc: ''
+        selected: false
+        title: 工单流程回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 6700
+        y: 252.5
+      positionAbsolute:
+        x: 6700
+        y: 252.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: ticket_active
+          conditions:
+          - comparison_operator: contains
+            id: 1769400000101
+            value: 'true'
+            varType: string
+            variable_selector:
+            - conversation
+            - ticket_flow_active
+          id: ticket_active
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 是否正在补充工单
+        type: if-else
+      height: 126
+      id: '1769400000001'
+      position:
+        x: 1046.8801277245823
+        y: 360.9528503004688
+      positionAbsolute:
+        x: 1046.8801277245823
+        y: 360.9528503004688
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: constant
+          operation: set
+          value: 'true'
+          variable_selector:
+          - conversation
+          - ticket_flow_active
+          write_mode: over-write
+        selected: true
+        title: 标记进入工单补充
+        type: assigner
+        version: '2'
+      height: 86
+      id: '1769400000002'
+      position:
+        x: 4939
+        y: 546.9607194126759
+      positionAbsolute:
+        x: 4939
+        y: 546.9607194126759
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        citation_mode: false
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1769400000301
+          role: system
+          text: 你是工单提交状态判断助手。只判断提交工单 Agent 的回复是否表示工单已经成功创建。
+        - id: 1769400000302
+          role: user
+          text: '提交工单 Agent 回复：
+
+            {{#1768973875702.text#}}
+
+
+            判断规则：
+
+            - 如果回复明确表示工单已经提交成功、创建成功、创建完成，或已经返回工单号/单号/编号，输出 SUBMITTED。
+
+            - 如果回复是在要求用户补充信息、展示待确认清单、等待用户回复“确认提交”、说明提交失败或无法提交，输出 IN_PROGRESS。
+
+
+            输出格式必须严格为一行：
+
+            状态：SUBMITTED 或 IN_PROGRESS'
+        selected: false
+        title: 工单提交状态判断
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1769400000003'
+      position:
+        x: 5605.863970735213
+        y: 365.5
+      positionAbsolute:
+        x: 5605.863970735213
+        y: 365.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: submitted
+          conditions:
+          - comparison_operator: contains
+            id: 1769400000401
+            value: 状态：SUBMITTED
+            varType: string
+            variable_selector:
+            - '1769400000003'
+            - text
+          id: submitted
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 是否已提交成功
+        type: if-else
+      height: 126
+      id: '1769400000004'
+      position:
+        x: 5941
+        y: 365.5
+      positionAbsolute:
+        x: 5941
+        y: 365.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: constant
+          operation: set
+          value: 'false'
+          variable_selector:
+          - conversation
+          - ticket_flow_active
+          write_mode: over-write
+        selected: false
+        title: 清除工单补充状态
+        type: assigner
+        version: '2'
+      height: 86
+      id: '1769400000005'
+      position:
+        x: 6302.764775495746
+        y: 59.14614045814437
+      positionAbsolute:
+        x: 6302.764775495746
+        y: 59.14614045814437
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        citation_mode: false
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1769300000701
+          role: system
+          text: 你是 ITSM 工单续办意图判断助手。你只判断用户当前消息是否是在上一轮异常处理建议之后，认为回答无帮助并要求提交工单。
+        - id: 1769300000702
+          role: user
+          text: '当前用户消息：
+
+            {{#sys.query#}}
+
+
+            已保存的上一轮异常摘要：
+
+            {{#conversation.last_exception_summary#}}
+
+
+            判断规则：
+
+            - 如果“已保存的上一轮异常摘要”不为空，并且用户当前消息表达没帮助、还是不行、无法解决、帮我提交、提交工单、建单、转人工、创建ITSM工单等续办意图，输出
+            SUBMIT_PREVIOUS_TICKET。
+
+            - 如果用户当前消息描述了新的异常详情，或只是询问怎么处理，或没有可复用的上一轮异常摘要，输出 NORMAL_FLOW。
+
+
+            输出格式必须严格为一行：
+
+            意图：SUBMIT_PREVIOUS_TICKET 或 NORMAL_FLOW'
+        selected: false
+        title: 工单续办意图判断
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1769300000007'
+      position:
+        x: 1478
+        y: 458.5
+      positionAbsolute:
+        x: 1478
+        y: 458.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: submit_previous
+          conditions:
+          - comparison_operator: contains
+            id: 1769300000901
+            value: 意图：SUBMIT_PREVIOUS_TICKET
+            varType: string
+            variable_selector:
+            - '1769300000007'
+            - text
+          id: submit_previous
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 是否复用上一轮异常提交工单
+        type: if-else
+      height: 126
+      id: '1769300000009'
+      position:
+        x: 1812
+        y: 458.5
+      positionAbsolute:
+        x: 1812
+        y: 458.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: submit_ticket
+          conditions:
+          - comparison_operator: contains
+            id: 1769300000601
+            value: 用户意图：SUBMIT_TICKET
+            varType: string
+            variable_selector:
+            - '17783195346000'
+            - text
+          id: submit_ticket
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 是否直接提交工单
+        type: if-else
+      height: 126
+      id: '1769300000006'
+      position:
+        x: 2982.0668816896637
+        y: 623.6565264642306
+      positionAbsolute:
+        x: 2982.0668816896637
+        y: 623.6565264642306
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17783195346000'
+          - text
+          variable_selector:
+          - conversation
+          - last_exception_summary
+          write_mode: over-write
+        selected: false
+        title: 保存最近异常摘要
+        type: assigner
+        version: '2'
+      height: 86
+      id: '1769300000008'
+      position:
+        x: 2486.9762351900417
+        y: 623.6565264642306
+      positionAbsolute:
+        x: 2486.9762351900417
+        y: 623.6565264642306
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        citation_mode: false
+        context:
+          enabled: true
+          variable_selector:
+          - '17783195844370'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1769300000201
+          role: system
+          text: 你是知识库可答性判断助手。只判断检索结果是否足以解决用户异常，不负责回答。
+        - id: 1769300000202
+          role: user
+          text: '标准化异常描述：
+
+            {{#17783195346000.text#}}
+
+
+            知识库检索结果：
+
+            {{#context#}}
+
+
+            判断规则：
+
+            - 如果知识库结果为空、明显不相关、只有泛泛描述、没有可执行处理办法，输出 NEED_TICKET。
+
+            - 如果知识库结果包含和异常现象相关的原因、排查步骤或处理办法，输出 CAN_ANSWER。
+
+
+            输出格式必须严格为两行：
+
+            判定：CAN_ANSWER 或 NEED_TICKET
+
+            原因：一句话说明'
+        selected: false
+        title: 知识库可答性分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1769300000002'
+      position:
+        x: 3405.444031337949
+        y: 744.0437327982988
+      positionAbsolute:
+        x: 3405.444031337949
+        y: 744.0437327982988
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: can_answer
+          conditions:
+          - comparison_operator: contains
+            id: 1769300000301
+            value: CAN_ANSWER
+            varType: string
+            variable_selector:
+            - '1769300000002'
+            - text
+          id: can_answer
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 是否可用知识库回答
+        type: if-else
+      height: 126
+      id: '1769300000003'
+      position:
+        x: 4180
+        y: 802
+      positionAbsolute:
+        x: 4180
+        y: 802
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        citation_mode: false
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1769300000401
+          role: system
+          text: 你是 ITSM 系统异常处理助手。只能依据知识库检索结果回答，不要编造知识库之外的处理办法。
+        - id: 1769300000402
+          role: user
+          text: '标准化异常描述：
+
+            {{#1769300000002.text#}}
+
+
+            知识库检索结果：
+
+            {{#context#}}
+
+
+            请给用户一个清晰、可执行的处理建议：
+
+            1. 先简要说明匹配到的异常或可能原因。
+
+            2. 按步骤给出处理办法或排查路径。
+
+            3. 如果知识库信息仍不足以完全解决，说明需要补充哪些信息。
+
+            4. 结尾提示：如果按以上方法仍无法解决，可以继续补充信息或提交工单。'
+        selected: false
+        title: 知识库引导回答
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1769300000004'
+      position:
+        x: 4540.672892120166
+        y: 970.7284936842669
+      positionAbsolute:
+        x: 4540.672892120166
+        y: 970.7284936842669
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1769300000004.text#}}'
+        desc: ''
+        selected: false
+        title: 知识库回复
+        type: answer
+        variables: []
+      height: 105
+      id: '1769300000005'
+      position:
+        x: 4871.226797055175
+        y: 965.8232871042549
+      positionAbsolute:
+        x: 4871.226797055175
+        y: 965.8232871042549
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        agent_parameters:
+          context:
+            type: variable
+            value:
+            - '17783195844370'
+            - result
+          instruction:
+            type: constant
+            value: "# 角色定义\n\n你是一个 **ITSM系统提交异常处理工单的 AI Agent**,语言简练，只回复必要信息。\n职责：\n\
+              1. 收集工单信息；\n2. 校验用户输入是否合法；\n3. 智能提示用户补全缺失字段或修改非法字段；\n4. 创建工单前生成确认清单，用户确认后才能提交。\n\
+              > 注意：不要尝试基于知识库解决异常。\n\n---\n## 用户与字段管理\n- 用户ID:\n* createAuthor: {{#sys.salary_id#}}\n\
+              * updateAuthor: {{#sys.salary_id#}}\n\n- 内部必填字段（AI跟踪，不直接显示在确认清单中）：\n\
+              \        - 工厂编号\n        - 服务代码\n        - 异常代码\n        - 工单类型\n  \
+              \      - 工单内容\n- 异常数据ID：\n      - 用户未输入时，AI自动生成 16 位字符串\n      - 生成方式：使用当前时间戳或随机种子生成唯一字符串\n\
+              \n---\n\n### 工厂列表\n|事业体|工厂编号|工厂名称|\n|---------|------------|--------------|\n\
+              |cbu|1001|大客户事业体|\n|cbu|1002|龙头五金事业体|\n|cbu|1003|大健康事业体|\n|cbu|1005|智能马桶制造厂|\n\
+              |cbu|1004|厨卫事业体工厂|\n|cbu|100Z|厨卫事业体工厂|\n|cbu|1008|大客户事业体|\n|cbu|1009|龙头五金事业体|\n\
+              |cbu|1007|大健康事业体|\n|cbu|1006|智能马桶事业部|\n|cbu|100A|厦门建霖厨卫事业体工厂|\n|apis|8031|阿匹斯智能电子工厂|\n\
+              |apis|8032|阿匹斯健康管业工厂|\n|apis|8033|阿匹斯智能制造工厂|\n|apis|8038|阿匹斯健康管业|\n\
+              |apis|8037|阿匹斯智能电子|\n|easo|8021|英仕8021|\n|fbu|8061|百霖|\n|zrn|8051|漳州大客户事业体8051|\n\
+              |zrn|8052|龙头五金事业体8052|\n|zrn|8058|漳州大客户事业体(无价值)|\n|zrn|8059|漳州龙头五金事业体|\n\
+              |thrn|8121|泰国建霖大客户事业体工厂|\n|thrn|8122|泰国建霖龙头五金事业体工厂|\n|thrn|8123|泰国建霖大健康客户事业体工厂|\n\
+              |thrn|8125|泰国建霖厨卫事业体工厂|\n|thrn|8126|泰国建霖净水事业体工厂|\n|thrn|8127|泰国建霖威霖事业体工厂|\n\
+              |thrn|812W|泰国建霖无价值工厂|\n|wrn|8011|宁波威霖营运中心|\n|wrn|8019|宁波威霖|\n|sgrn|8191|新加坡建霖工厂|\n\
+              |sgrn|819W|新加坡建霖无价值工厂|\n---\n\n### 异常代码\n|code|name|\n|----|--------------|\n\
+              |0|其他|\n|6000|业务异常|\n|7000|系统异常|\n|8001|数据库表字段长度超出限制异常|\n|8002|数据库列名无效异常|\n\
+              |8003|数据库表对象无效异常|\n|8004|数据库乐观锁异常|\n|8005|数据库数据完整性违规异常|\n|9000|网络异常|\n\
+              |7001|空指针异常|\n|7002|数字格式异常|\n|7003|日期转换异常|\n|7004|Java服务异常|\n|6001|WMS库存异常|\n\
+              |5000|外部系统报错|\n|7005|数组越界异常|\n|5001|文件服务异常|\n|6003|重复提交异常|\n---\n\n\
+              ### 工单类型\n|code|name|\n|----|-------|\n|DESKTOP|桌面工单|\n|SYSTEM|系统工单|\n\
+              ---\n\n### 服务列表\n|code|name|\n|----|---|\n|MES|MES|\n|WMS|WMS|\n|ELM|ELM|\n\
+              \n---\n\n## 校验规则\n\n1. **服务代码**必须匹配 [MES/WMS/ELM]，否则提示用户补充：\n`\"服务代码无效，请从\
+              \ [MES/WMS/ELM] 中选择正确服务代码\"`\n\n2. **工单类型**必须匹配：\n- 桌面工单\n- 系统工单\n\n\
+              3. **异常代码**必须匹配异常代码列表，否则使用默认 0。\n\n4. **工厂编号**必须在工厂列表中匹配，否则提示用户补充：\n\
+              `\"工厂编号无效，请输入有效编号\"`\n\n5. **工单内容**不能为空。\n\n6. **异常数据ID**：\n- 用户未提供时自动生成\
+              \ 16 位随机字符串。\n\n---\n\n## 智能补全提示逻辑（只针对必填字段）\n\n1. 收集用户输入后，检查所有必填字段：\n\
+              - 工厂编号（必填）\n- 服务代码（必填）\n- 工单类型（必填）\n- 工单内容（必填）\n- 异常代码（必填，若不合法使用默认0）\n\
+              - 异常数据ID（自动生成，如未提供）\n\n2. 对每个必填字段：\n- 缺失 → 提示用户补充\n- 非法 → 提示用户修改\n\n\
+              3. 可选字段（如工单内容截图）即使未填写，也不提示用户补充。\n\n4. 如果所有必填字段合法 → 生成确认清单\n如果有必填字段缺失或非法\
+              \ → **不生成确认清单**，输出示例：\n    ⚠ 您提交的信息存在问题，请补充或修改以下字段：\n    工厂编号: 未填写或无效\n\
+              \    服务代码: 未填写或不在 [MES/WMS/ELM] 中\n    工单类型: 未填写或非法\n    工单内容: 未填写\n\
+              \n- 仅当用户提供所有必填字段并合法后，AI 才生成确认清单。\n---\n## 确认清单示例\n【ITSM工单-待确认信息清单】\n\
+              异常数据ID: : [当前值，未提供则按规则生成随机值]\n工单类型: [当前值]\n事业体: [当前值]\n工厂编号: [当前值]\n\
+              服务代码: [当前值]\n异常代码: [当前值]\n工单内容: [当前值]\n工单内容截图: [当前值]\n⚠ 请逐项确认以上信息是否正确？\n\
+              (仅当所有信息确认无误后才回复\"确认提交\")\n"
+          model:
+            type: constant
+            value:
+              completion_params:
+                enable_thinking: false
+                temperature: 0.1
+              mode: chat
+              model: DeepSeekV32
+              model_type: llm
+              provider: langgenius/openai_api_compatible/openai_api_compatible
+              type: model-selector
+          query:
+            type: constant
+            value: '用户原始消息：
+
+              {{#sys.query#}}
+
+
+              当前是否正在补充工单：
+
+              {{#conversation.ticket_flow_active#}}
+
+
+              用户输入的附件信息：
+
+              {{#1768980983844.output#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 调用AI工单添加接口，创建工单记录并返回操作结果
+              parameters:
+                code:
+                  auto: 1
+                  value: null
+                createAuthor:
+                  auto: 1
+                  value: null
+                description:
+                  auto: 1
+                  value: null
+                factoryCode:
+                  auto: 1
+                  value: null
+                file:
+                  auto: 1
+                  value: null
+                serviceCode:
+                  auto: 1
+                  value: null
+                traceId:
+                  auto: 1
+                  value: null
+                updateAuthor:
+                  auto: 1
+                  value: null
+              provider_name: 1a20c2f4-025e-4f10-a627-d44b9cafec2d
+              provider_show_name: ITSM-创建处理异常信息工单
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 追踪ID
+                  ja_JP: 追踪ID
+                  pt_BR: 追踪ID
+                  zh_Hans: 追踪ID
+                label:
+                  en_US: traceId
+                  ja_JP: traceId
+                  pt_BR: traceId
+                  zh_Hans: traceId
+                llm_description: 异常数据的唯一标识ID/traceId/追踪ID。只有明确带有“唯一标识ID”、“异常数据ID”、“traceId”、“追踪ID”的值才能作为
+                  traceId；用户说“唯一标识IDWO-120242101113-001”时取 WO-120242101113-001。不要把“异常类型编号”、“异常类型代码”、“异常类型名称”、“状态码”、“code”的值填入
+                  traceId；例如“异常类型编号：6000”应作为 code=6000，traceId 未提供时自动生成。用户未提供时自动生成
+                  16 位小写十六进制 traceId，生成规则等价于 Python `import secrets; secrets.token_hex(8)`；禁止照抄提示词示例、固定值或历史工单ID。如果当前工单前文已经生成过随机
+                  traceId，复用同一个值。
+                max: null
+                min: null
+                name: traceId
+                options: []
+                placeholder:
+                  en_US: 追踪ID
+                  ja_JP: 追踪ID
+                  pt_BR: 追踪ID
+                  zh_Hans: 追踪ID
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 服务代码
+                  ja_JP: 服务代码
+                  pt_BR: 服务代码
+                  zh_Hans: 服务代码
+                label:
+                  en_US: serviceCode
+                  ja_JP: serviceCode
+                  pt_BR: serviceCode
+                  zh_Hans: serviceCode
+                llm_description: 服务代码或系统代码。用户提供“系统名称：ELM”或“系统代码：ELM”时取 ELM。
+                max: null
+                min: null
+                name: serviceCode
+                options: []
+                placeholder:
+                  en_US: 服务代码
+                  ja_JP: 服务代码
+                  pt_BR: 服务代码
+                  zh_Hans: 服务代码
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 工厂代码
+                  ja_JP: 工厂代码
+                  pt_BR: 工厂代码
+                  zh_Hans: 工厂代码
+                label:
+                  en_US: factoryCode
+                  ja_JP: factoryCode
+                  pt_BR: factoryCode
+                  zh_Hans: factoryCode
+                llm_description: 工厂代码或工厂名称。用户只提供“工厂名称：大客户事业体”且没有工厂编号时，先取“大客户事业体”作为
+                  factoryCode 候选值。
+                max: null
+                min: null
+                name: factoryCode
+                options: []
+                placeholder:
+                  en_US: 工厂代码
+                  ja_JP: 工厂代码
+                  pt_BR: 工厂代码
+                  zh_Hans: 工厂代码
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 状态码
+                  ja_JP: 状态码
+                  pt_BR: 状态码
+                  zh_Hans: 状态码
+                label:
+                  en_US: code
+                  ja_JP: code
+                  pt_BR: code
+                  zh_Hans: code
+                llm_description: 状态码。用户未提供时默认填 0。
+                max: null
+                min: null
+                name: code
+                options: []
+                placeholder:
+                  en_US: 状态码
+                  ja_JP: 状态码
+                  pt_BR: 状态码
+                  zh_Hans: 状态码
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: number
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 描述信息
+                  ja_JP: 描述信息
+                  pt_BR: 描述信息
+                  zh_Hans: 描述信息
+                label:
+                  en_US: description
+                  ja_JP: description
+                  pt_BR: description
+                  zh_Hans: description
+                llm_description: 工单内容/异常现象/报错内容/问题描述。用户说“工单内容：911111862-01模具穴数不能为空”时取“911111862-01模具穴数不能为空”。
+                max: null
+                min: null
+                name: description
+                options: []
+                placeholder:
+                  en_US: 描述信息
+                  ja_JP: 描述信息
+                  pt_BR: 描述信息
+                  zh_Hans: 描述信息
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 创建人
+                  ja_JP: 创建人
+                  pt_BR: 创建人
+                  zh_Hans: 创建人
+                label:
+                  en_US: createAuthor
+                  ja_JP: createAuthor
+                  pt_BR: createAuthor
+                  zh_Hans: createAuthor
+                llm_description: 创建人
+                max: null
+                min: null
+                name: createAuthor
+                options: []
+                placeholder:
+                  en_US: 创建人
+                  ja_JP: 创建人
+                  pt_BR: 创建人
+                  zh_Hans: 创建人
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 更新人
+                  ja_JP: 更新人
+                  pt_BR: 更新人
+                  zh_Hans: 更新人
+                label:
+                  en_US: updateAuthor
+                  ja_JP: updateAuthor
+                  pt_BR: updateAuthor
+                  zh_Hans: updateAuthor
+                llm_description: 更新人
+                max: null
+                min: null
+                name: updateAuthor
+                options: []
+                placeholder:
+                  en_US: 更新人
+                  ja_JP: 更新人
+                  pt_BR: 更新人
+                  zh_Hans: 更新人
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: 文件URL
+                  ja_JP: 文件URL
+                  pt_BR: 文件URL
+                  zh_Hans: 文件URL
+                label:
+                  en_US: file
+                  ja_JP: file
+                  pt_BR: file
+                  zh_Hans: file
+                llm_description: 工单内容截图或附件URL列表。用户未上传附件时填 []。
+                max: null
+                min: null
+                name: file
+                options: []
+                placeholder:
+                  en_US: 文件URL
+                  ja_JP: 文件URL
+                  pt_BR: 文件URL
+                  zh_Hans: 文件URL
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              settings: {}
+              tool_description: 调用AI工单添加接口，创建工单记录并返回操作结果
+              tool_label: addAiOrder
+              tool_name: addAiOrder
+              type: api
+        agent_strategy_label: FunctionCalling
+        agent_strategy_name: function_calling
+        agent_strategy_provider_name: langgenius/agent/agent
+        desc: ''
+        memory:
+          query_prompt_template: '用户原始消息：
+
+            {{#sys.query#}}
+
+
+            当前是否正在补充工单：
+
+            {{#conversation.ticket_flow_active#}}
+
+
+            可复用的异常摘要：
+
+            {{#conversation.last_exception_summary#}}
+
+
+            {{#sys.files#}}'
+          window:
+            enabled: true
+            size: 50
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: null
+        plugin_unique_identifier: langgenius/agent:0.0.25@3507a9a417ea8d76e5de6b2803953ca891851b6b336fafe1315471782711730f
+        selected: false
+        title: 提交工单流程
+        tool_node_version: '2'
+        type: agent
+      height: 198
+      id: '1768973875702'
+      position:
+        x: 5272.462454377421
+        y: 365.5
+      positionAbsolute:
+        x: 5272.462454377421
+        y: 365.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 174
+        is_parallel: false
+        iterator_input_type: array[file]
+        iterator_selector:
+        - sys
+        - files
+        output_selector:
+        - '1769087070966'
+        - text
+        output_type: array[string]
+        parallel_nums: 3
+        selected: false
+        start_node_id: 1768980983844start
+        title: 循环上传图片得到链接
+        type: iteration
+        width: 508
+      height: 174
+      id: '1768980983844'
+      position:
+        x: -131.5314393587555
+        y: 365.5
+      positionAbsolute:
+        x: -131.5314393587555
+        y: 365.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 508
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1768980983844start
+      parentId: '1768980983844'
+      position:
+        x: 60
+        y: 63
+      positionAbsolute:
+        x: -71.5314393587555
+        y: 428.5
+      selectable: false
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        is_team_authorization: true
+        iteration_id: '1768980983844'
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 图片文件
+            ja_JP: 图片文件
+            pt_BR: 图片文件
+            zh_Hans: 图片文件
+          label:
+            en_US: file
+            ja_JP: file
+            pt_BR: file
+            zh_Hans: file
+          llm_description: 图片文件
+          max: null
+          min: null
+          name: file
+          options: []
+          placeholder:
+            en_US: 图片文件
+            ja_JP: 图片文件
+            pt_BR: 图片文件
+            zh_Hans: 图片文件
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: file
+        params:
+          file: ''
+        provider_id: 10448a69-652b-4109-9c63-24d6c96e8789
+        provider_name: ITSM-DEV系统上传图片
+        provider_type: api
+        selected: false
+        title: itomuploadimg_post
+        tool_configurations: {}
+        tool_description: 上传图片
+        tool_label: itomuploadimg_post
+        tool_name: itomuploadimg_post
+        tool_node_version: '2'
+        tool_parameters:
+          file:
+            type: variable
+            value:
+            - '1768980983844'
+            - item
+        type: tool
+      height: 54
+      id: '1769087070966'
+      parentId: '1768980983844'
+      position:
+        x: 207.03143313302076
+        y: 65
+      positionAbsolute:
+        x: 75.49999377426525
+        y: 430.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        citation_mode: false
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.7
+          mode: chat
+          name: qwen3
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 1769300000101
+          role: system
+          text: 你是 ITSM 系统异常问题提取助手。请从用户消息中提取可用于知识库检索的信息，并判断用户意图。默认先查询知识库尝试回答，只有用户明确要求提交工单时才进入建单流程。输出简洁、结构化的中文文本，不要编造不存在的信息。
+        - id: 1769300000102
+          role: user
+          text: "用户原始消息：\n{{#sys.query#}}\n\n用户输入的附件信息：\n{{#1768980983844.output#}}\n\
+            \n意图判断规则：\n- 只有当用户明确表达“提交工单、帮我提交、建单、创建ITSM工单、转人工处理、按建议仍无法解决要提交”等建单/人工处理意图时，用户意图才输出\
+            \ SUBMIT_TICKET。\n- 如果用户只是提供报错文本、异常现象、异常数据ID/traceId，或询问异常原因、处理办法、怎么解决、如何排查，用户意图必须输出\
+            \ QUERY_SOLUTION，并进入知识库检索。\n- 像“911111862-01模具穴数不能为空”这类只有异常ID和报错内容、没有提交/建单/转人工措辞的消息，必须判断为\
+            \ QUERY_SOLUTION。\n字段提取规则：\n- “唯一标识ID”、“异常数据ID”、“traceId”、“追踪ID”对应 traceId/异常数据ID；例如“唯一标识IDWO-120242101113-001”应提取为\
+            \ WO-120242101113-001。只有明确带有这些字段名的值才能作为 \n- “工厂编号”、“工厂代码”、“工厂名称”对应 工厂编号/工厂名称；只有工厂名称时也要保留原值。\n\
+            - “系统名称”、“系统代码”、“服务名称”、“服务代码”对应 服务/系统代码；例如“系统名称：ELM”应提取为 ELM。\n- “工单内容”、“异常现象”、“报错内容”、“问题描述”对应\
+            \ 工单内容。\n- “异常类型编号”、“异常类型代码”、“状态码”、“code”对应异常类型/状态码，只能放在用户补充信息中，不能放入 traceId/异常数据ID。\n\
+            \n请按以下字段输出，其中“用户意图”这一行只能填写一个枚举值，不能同时输出两个选项：\n用户意图：<根据规则填写 QUERY_SOLUTION\
+            \ 或 SUBMIT_TICKET，二选一>\n异常现象：\n异常数据ID：\n工厂编号/工厂名称：\n服务/系统代码：\n工单内容：\n\
+            用户补充信息：\n附件URL："
+        selected: false
+        title: 异常问题提取 (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17783195346000'
+      position:
+        x: 621.7621573760155
+        y: 365.5
+      positionAbsolute:
+        x: 621.7621573760155
+        y: 365.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - LoRShn5CGH4+ktof4FTrDfdh6EWGMuv32QbMZ7kHEr/ngvS/3NKBvoibUFOV9v34
+        desc: ''
+        enable_reranking: false
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: bge-reranker-base
+            provider: langgenius/xinference/xinference
+          top_k: 4
+        query_variable_selector:
+        - '17783195346000'
+        - text
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 (1)
+        type: knowledge-retrieval
+      height: 92
+      id: '17783195844370'
+      position:
+        x: 795.5627147455675
+        y: 546.9607194126759
+      positionAbsolute:
+        x: 795.5627147455675
+        y: 546.9607194126759
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 225.73273715488358
+      y: 53.55429357307162
+      zoom: 0.6514052251542221
