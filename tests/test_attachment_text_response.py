@@ -61,7 +61,7 @@ class AttachmentTextResponseTests(unittest.TestCase):
         self.assertIn("调用中断", rt.obj(parsed["result"])["error"])
 
     def test_final_graph_mapping_and_embedded_attachment_code_match_runtime(self):
-        app = yaml.safe_load((ROOT / "系统异常助手_附件上传修复版.yml").read_text())
+        app = yaml.safe_load((ROOT / "系统异常助手_latest.yml").read_text())
         nodes = {n["id"]: n["data"] for n in app["workflow"]["graph"]["nodes"]}
         contract = json.loads(next(v for v in app["workflow"]["environment_variables"] if v["name"] == "itsm_response_contract")["value"])
         self.assertEqual(contract["upload"], TEXT_CONTRACT["upload"])

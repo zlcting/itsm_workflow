@@ -67,7 +67,7 @@ class NativeAttachmentFlowTests(unittest.TestCase):
         self.assertEqual(self.contract["upload"], expected)
         from pathlib import Path
         import yaml
-        final = yaml.safe_load((Path(__file__).resolve().parents[1] / "系统异常助手_附件上传修复版.yml").read_text())
+        final = yaml.safe_load((Path(__file__).resolve().parents[1] / "系统异常助手_latest.yml").read_text())
         actual = json.loads(next(v for v in final["workflow"]["environment_variables"] if v["name"] == "itsm_response_contract")["value"])
         self.assertEqual(actual["upload"], expected)
 
